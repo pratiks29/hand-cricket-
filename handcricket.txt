@@ -1,0 +1,141 @@
+import java.util.Random;
+import java.util.Scanner;
+
+class qwerty
+{
+    public static void main(String[] args)
+    {  int bdec,run,airun,total=0,rtotal=0,atotal=0;
+        System.out.println("welcome to hand cricket league \n enter the name of your team");
+        Scanner sc = new Scanner(System.in);
+        String teamname = sc.nextLine();
+        System.out.println("ready for the toss? \n the rule is to choose whether you want odd or even and entering an random number till 6");
+        System.out.println("choose btw odd and even now....press o for odd and e for even ");
+        char toss = sc.next().charAt(0);
+        Random rn = new Random();
+        int x = rn.nextInt(7);
+        System.out.println("okay, now enter your number!");
+        int t= sc.nextInt();
+        if(t>6)
+        {
+            System.out.println("enter a number that is less than 7");
+        }
+        System.out.println("AI's no. is "+x);
+        System.out.println("          ="+(x+t));
+        int check = (x+t)%2;
+        if(toss == 'e'&& check ==0)
+        {
+            System.out.println("Congrats you have won the toss!\n 0 for batting \n 1 for fielding");
+            bdec = sc.nextInt();
+        }else if(toss == 'e'&& check==1)
+        {
+            System.out.println("sorry you lost the toss");
+            int cbdec= rn.nextInt(2);
+            if(cbdec==0)
+            { System.out.println("the AI wants to bat first");bdec=1;}
+            else
+            {System.out.println("the AI wants to bowl first");bdec=0;}
+
+        }else if(toss =='o'&& check==0)
+        {
+            System.out.println("sorry you lost the toss");
+            int cbdec= rn.nextInt(2);
+            if(cbdec==0)
+            {System.out.println("the AI wants to bat first");bdec=1;}
+            else
+            { System.out.println("the AI wants to bowl first");bdec=0;}
+        }else
+        {
+            System.out.println("congrats you have won the toss \n press 0 for batting \n 1 for fielding");
+            bdec=sc.nextInt();
+        }switch(bdec)
+    {
+        case 0:
+            System.out.println("okay you go first..\n you have only one wicket.... so gear up! ");
+            do {
+                System.out.print("enter your number now ");
+                run = sc.nextInt();
+                airun = rn.nextInt(7);
+                System.out.println("AI=" + airun);
+                total+=run;
+
+            }while(run != airun);
+            rtotal = total-run;
+            System.out.println("oh noo both look same to me :(");
+            System.out.println("wow you have scored a whopping "+ rtotal+" runs!");
+            System.out.println("now its time for AI to bat");
+            airun=0;run=0;total=0;
+            do {
+                System.out.println("enter you number now");
+                run = sc.nextInt();
+                airun=rn.nextInt(7);
+                System.out.println("AI="+airun);
+                if(airun!=run)
+                {
+                    total+=airun;
+                }if(total > rtotal)
+                {
+                    System.out.println("oh noo");
+                    System.out.println("you've lost this game sadly try again next time");
+                    System.out.println("AI scored "+total+ "\n"+teamname+" scored "+rtotal);
+                }
+
+            }while(airun!=run);
+                atotal=total;
+            if(atotal<rtotal) {
+                System.out.println("CONGRATULATIONS you have won this game!!");
+                System.out.println(teamname+" has scored" +rtotal+"whereas AI only scored "+atotal);
+                System.out.println("and you won by "+ (rtotal-atotal)+" runs");
+
+            }else {
+                System.out.println("its a tie");
+                System.out.println(teamname + "scored" + rtotal);
+            }break;
+        case 1:
+            System.out.println("okay AI goes first to bat.... remember you only have to take one wicket");
+            do {
+                System.out.print("enter your number now ");
+                run = sc.nextInt();
+                airun = rn.nextInt(7);
+                System.out.println("AI=" + airun);
+
+                total+=airun;
+
+            }while(run != airun);
+            atotal = total-airun;
+            System.out.println("yaay both look same to me :)");
+            System.out.println("wow AI has scored a whopping "+ atotal+" runs!");
+            System.out.println("now its time for you to bat");
+            airun=0;run=0;total=0;
+            do {
+                System.out.println("enter you number now");
+                run = sc.nextInt();
+                airun=rn.nextInt(7);
+                System.out.println("AI="+airun);
+                if(airun!=run)
+                {
+                    total+=run;
+                }if(total > atotal)
+                {
+                    System.out.println("yaay");
+                    System.out.println("you've won this game CONGRATULATIONS ");
+                    System.out.println("AI scored "+total+ "\n"+teamname+" scored "+total);
+                    break;
+                }
+            }while(airun!=run);
+            rtotal=total;
+            if(atotal>rtotal) {
+                System.out.println("sadly  you have lost this game :(!!");
+                System.out.println(teamname+" has scored" +rtotal+"whereas AI only scored "+atotal);
+                System.out.println("and you lost by "+ (rtotal-atotal)+" runs");
+
+            }else if(atotal == rtotal){
+                System.out.println("its a tie");
+                System.out.println(teamname + "scored" + rtotal);
+            }break;
+
+
+
+            }
+        }
+
+    }
